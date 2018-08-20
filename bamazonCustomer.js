@@ -1,11 +1,10 @@
-const mysql = require('mysql');
 const inquirer = require('inquirer');
 const faker = require('faker');
 const connection = require('./connection');
 
 //Insert fake data into database
 
-// let sql =
+// let dataQuery =
 //   'INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ?';
 
 // let values = [];
@@ -14,14 +13,31 @@ const connection = require('./connection');
 //   values.push([
 //     faker.commerce.productName(),
 //     faker.commerce.department(),
-//     faker.commerce.price(),
-//     Math.floor(Math.random() * 401) + 100
+//     (Math.random() * 901 + 100).toFixed(2),
+//     Math.floor(Math.random() * 181) + 20
 //   ]);
 // }
 
-// connection.query(sql, [values], (err, result) => {
+// connection.query(dataQuery, [values], (err, result) => {
 //   if (err) {
 //     throw err;
 //   }
 //   console.log(result.affectedRows);
 // });
+
+let displayQuery = 'SELECT item_id, product_name, price FROM products';
+
+connection.query(displayQuery, (err, result) => {
+  if (err) {
+    throw err;
+  }
+  console.log('');
+  result.forEach(item => {
+    console.log(
+      `Product ID: ${item.item_id} - ${item.product_name} - on sale for $${
+        item.price
+      }`
+    );
+    console.log('');
+  });
+});
