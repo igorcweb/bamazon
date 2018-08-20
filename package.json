@@ -9,6 +9,7 @@
   "author": "Igor Chernyshev",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "faker": "^4.1.0",
     "inquirer": "^6.1.0",
     "mysql": "^2.16.0"
