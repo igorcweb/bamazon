@@ -15,8 +15,6 @@ connection.connect(err => {
     console.log('Error: ', err);
     connection.end();
   }
-  console.log('');
-  console.log('Welcome to Bamazon Store!  Here is out inventory:');
 });
 
 module.exports = connection;
