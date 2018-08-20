@@ -29,9 +29,7 @@ const ids = [];
 console.log('');
 console.log('Welcome to Bamazon Store!');
 console.log('');
-console.log(
-  'You will not find these amazing deals anywhere else!  Free Shipping!'
-);
+console.log('You will not find these amazing deals anywhere else!');
 console.log('');
 console.log(
   'Hurry and get these incredible products while they are still in stock!'
@@ -77,13 +75,23 @@ function processProduct() {
       } else {
         console.log('');
         console.log('Invalid ID');
-        console.log('');
         processProduct();
       }
     });
 }
 
-function confirmOrder(product_name) {
+function updateDatabase(product_name, number) {
+  let updateQuery = `UPDATE products SET stock_quantity = stock_quantity - ${number} WHERE product_name = '${product_name}'`;
+
+  connection.query(updateQuery, err => {
+    if (err) {
+      console.log('Error: ', err);
+      connection.end();
+    }
+  });
+}
+
+function confirmOrder(product_name, number) {
   console.log('');
   inquirer
     .prompt([
@@ -101,7 +109,7 @@ function confirmOrder(product_name) {
         console.log(
           `Enjoy your ${product_name}!  Your satisfaction is guaranteed!`
         );
-        // updateDatabase();
+        updateDatabase(product_name, number);
         continueShopping();
       } else {
         console.log('');
@@ -121,7 +129,7 @@ function productById(id) {
     if (!stock_quantity) {
       console.log('');
       console.log('We are currently out of stock.  Please come back later.');
-      console.log('');
+      continueShopping();
     } else {
       console.log('');
       console.log(`You selected ${product_name}! Excellent Choice!`);
@@ -153,7 +161,7 @@ function processQuantity(product_name, price, stock_quantity) {
         console.log(`- Subtotal: $${subtotal.toFixed(2)}`);
         console.log(`- Tax: $${tax.toFixed(2)}`);
         console.log(`- Grand Total: $${grandTotal.toFixed(2)}`);
-        confirmOrder(product_name);
+        confirmOrder(product_name, number);
       } else {
         console.log(`We only have ${stock_quantity} in stock`);
         console.log('');
