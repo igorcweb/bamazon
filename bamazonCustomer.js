@@ -177,12 +177,11 @@ function shop() {
       throw err;
     }
     result.forEach(item => {
-      ids.push(item.item_id);
+      let { item_id, product_name, price } = item;
+      ids.push(item_id);
       console.log('');
       console.log(
-        `* Product ID: ${item.item_id} | ${item.product_name} | on sale for $${
-          item.price
-        } *`
+        `* Product ID: ${item_id} | ${product_name} | on sale for $${price} *`
       );
     });
     processProduct();
