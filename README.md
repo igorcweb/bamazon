@@ -1,5 +1,5 @@
-<video width="320" height="240" controls>Demo
-
-  <source src="./assets/bamazon_customer.mov" type="video/mov">
-
-</video>
+![](demo/bamazon1.png)
+![](demo/bamazon2.png)
+![](demo/bamazon2.png)
+![](demo/bamazon3.png)
+![](demo/bamazon4.png)
